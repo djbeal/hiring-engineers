@@ -439,12 +439,12 @@ $selected = mysql_select_db("$dbname",$dbhandle)   or die("Unable to connect to 
 - In order to run the installation and configuration commands on the AWS MySQL instance, you will have to SSH into the EC2 instance you created and run the following commands:
     - **yum install mysql -y** (to install MySQL client)
     - To create a **datadog** user with replication rights in your MySQL server, run the following:
-        - **mysql -h _yourhostaddress_ -P 3306 -u iluvdatadog --password**
+        - **mysql -h _yourhostaddress_ -P 3306 -u iluvdatadog -p**
         - Enter password: _**yourpassword**_
         - mysql> **CREATE USER datadog IDENTIFIED BY '_dd-generated-pwd_';**
-        - mysql> **GRANT REPLICATION CLIENT ON *.* TO datadog WITH MAX_USER_CONNECTIONS 5;**
+        - mysql> **GRANT REPLICATION CLIENT ON \*.\* TO datadog WITH MAX_USER_CONNECTIONS 5;**
     - If you'd like to get the full metrics catalog, please also grant the following privileges:
-        - mysql> **GRANT PROCESS ON *.* TO datadog;**
+        - mysql> **GRANT PROCESS ON \*.\* TO datadog;**
         - mysql> **GRANT SELECT ON performance_schema.\* TO datadog;**
         - mysql> **exit**
 
